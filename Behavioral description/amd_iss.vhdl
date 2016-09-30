@@ -44,9 +44,17 @@ package body amd_iss is
 	function gen_alea_input return AMD_PORT is
 		variable alea_std : std_logic_vector (31 downto 0);
 		variable val_in : AMD_PORT;
+		variable raand: real; -- random real-number in range 0 to 1.0
+		variable rand_num: integer :=0;
+		variable range_of_rand: real :=1000.0;
+		variable seed1, seed2: positive;
 
 	begin
-		alea_std := std_logic_vector(TO_UNSIGNED (rand, 32));
+		--alea_std := std_logic_vector(TO_UNSIGNED (rand, 32));
+
+		uniform(seed1, seed2, raand); --generate random number.
+		rand_num := integer(raand*range_of_rand); --rescale to 0..1000, convert integer part.
+		alea_std := std_logic_vector(TO_UNSIGNED (rand_num, 32));
 
 		val_in.a := std_logic_v4(alea_std(3 downto 0));
 		val_in.b := std_logic_v4(alea_std(7 downto 4));

@@ -1,4 +1,6 @@
 	.file	"amd_iss_c.c"
+	.code32 /*in Order to compile with gcc 64bits and link also with ghdl 64bits
+		I won't to compile with gcc -m32 because ghdl was compiled with gcc 64*/
 	.section	.rodata
 .LC0:
 	.string	"ZZZZ"
